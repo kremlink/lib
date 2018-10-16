@@ -1,0 +1,185 @@
+@mixin box-ie-title-grad($o){
+  filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#99000000',endColorstr='#99000000'),
+         progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$o});
+}
+
+@mixin box-elements-opacity($o){
+  opacity:$o;
+  filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$o*100});
+}
+
+#box-pop{
+  position:fixed;
+  left:-5000px;
+  top:0;
+  width:100%;
+  height:100%;
+  z-index:3;
+  overflow:auto;
+  &.shown{
+    left:0;
+  }
+  .wrap1{
+    @include abs($l:20px,$r:20px,$t:20px,$b:20px);
+  }
+  .wrap2{
+    @include abs($l:50%,$t:50%);
+    @extend %bxz;
+    &.bg{
+      background:#eee;
+    }
+  }
+  .wrap3{
+    position:relative;
+    width:100%;
+    height:100%;
+    &:hover .title{
+      opacity:1;
+      @include trs(opacity .3s ease-in-out);
+      @include box-ie-title-grad($o:100);
+    }
+  }
+  .close{
+    @include abs($r:-15px,$t:-15px);
+    width:30px;
+    height:30px;
+    background:url(#{$path}box/close.png) no-repeat;
+    z-index:1;
+  }
+  .prev,.next{
+    @include abs($l:0,$t:-5000px);
+    width:20%;
+    background:none;
+    .no-csstransforms2d &{
+      background:url(.);
+    }
+    &:before{
+      content:'';
+      @include abs($l:10px,$t:50%);
+      width:30px;
+      height:30px;
+      margin-top:-15px;
+      background:url(#{$path}box/prev.png) center no-repeat;
+    }
+  }
+  .next:before{
+    left:auto;
+    right:10px;
+    background-image:url(#{$path}box/next.png);
+  }
+  .loader{
+    @include abs($l:0,$r:0,$t:0,$b:0);
+    display:none;
+    background:url(#{$path}box/loader.gif) center no-repeat;
+  }
+  .zoom{
+    @include abs($l:10px,$t:-5000px);
+    width:46px;
+    height:45px;
+    background:url(#{$path}box/zoom-out.png) no-repeat;
+    cursor:pointer;
+  }
+  .content{
+    position:relative;
+    background:#fff;
+    &:after{
+      content:'';
+      @include abs($l:0,$r:0,$t:0,$b:0);
+      box-shadow:0 0 20px #333;
+    }
+  }
+  .image{
+    opacity:0;
+  }
+  .title{
+    @include abs($l:14px,$b:36px);
+    z-index:1;
+    font-size:16px;
+    padding:8px 16px;
+    background:rgba(0,0,0,0.55);
+    width:48%;
+    opacity:0;
+    @include box-ie-title-grad($o:0);
+  }
+  //--------base class applications
+  &.stretch{
+    .wrap2.box{
+      @include trs(all .5s ease-in-out);
+    }
+    .wrap3{
+      position:absolute;
+    }
+    .content{
+      position:absolute;
+    }
+    .image{
+      width:100%;
+      height:100%;
+    }
+    &.zoomable .zoom{
+      @include box-elements-opacity($o:0);
+      background:url(#{$path}box/zoom-in.png) no-repeat;
+    }
+  }
+  &.gallery{
+    .prev,.next{
+      top:0;
+      bottom:0;
+      opacity:0;
+      .no-csstransforms2d &{
+        top:-5000px;
+      }
+    }
+    .next{
+      left:auto;
+      right:0;
+    }
+    &.ready{
+      .wrap3:hover a.prev,.wrap3:hover a.next{
+        opacity:1;
+        @include trs(opacity .3s ease-in-out);
+        .no-csstransforms2d &{
+          top:0;
+        }
+      }
+    }
+  }
+  &.loading .loader{
+    display:block;
+  }
+  &.zoomable{
+    .zoom{
+      top:10px;
+      @include box-elements-opacity($o:0);
+    }
+    .wrap3:hover .zoom{
+      @include box-elements-opacity($o:1);
+      @include trs(opacity .3s ease-in-out);
+    }
+  }
+  &.min .image{
+    width:0;
+    height:0;
+  }
+  &.box .image{
+    @include trs(opacity .5s ease-in-out);
+  }
+}
+
+#box-overlay{
+  position:fixed;
+  background:#000;
+  @include box-elements-opacity($o:0);
+  left:0;
+  top:-100%;
+  width:100%;
+  height:100%;
+  z-index:3;
+  &.active{
+    top:0;
+  }
+  &.box{
+    opacity:0.5;
+    @include trs(opacity .3s ease-in-out);
+  }
+}

@@ -1,0 +1,24 @@
+/**
+*	CSS3 Grayscale class
+*	@voronianski 
+*/
+
+.grayscale {
+	-webkit-filter: grayscale(100%);/*apply css filter: firefox - no, chrome - yes, IE10 - no*/
+	-moz-filter: grayscale(100%);
+	-ms-filter: grayscale(100%);
+	-o-filter: grayscale(100%);
+	filter: grayscale(100%);
+	filter: url(grayscale.svg#grayscale);/*apply svg filter to html: firefox - yes, chrome - no, IE10 - no*/
+}
+
+#test path+path{
+filter:url(#grayscale1);/*apply svg filter to svg: firefox - no, chrome - yes, IE10 - yes*/
+/*filter:url(grayscale.svg#grayscale);*//*apply svg filter to svg: firefox - yes, chrome -no, IE10 - no*/
+/*mask:url(../images/test.svg#logo_mask);
+-webkit-mask:url(../images/test.svg);*/
+}
+
+/*applying svg filter on svg in html works everywhere (not IE9)*/
+/*applying mask on html works in firefox and chrome; in firefox only in external file,
+in chrome - needs svg figure representation of the mask*/

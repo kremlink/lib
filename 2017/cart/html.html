@@ -1,0 +1,43 @@
+<span data-cart='{"id":"id1","name":"Goodie1","ref":"1.html","price":"120","formImg":"images/cart-gb1.jpg"}' class="add"><span>В корзину</span></span>
+
+<aside class="cart-pop">
+    <a class="toggle" href="">
+        <span class="n"></span>
+        <span class="added">Товар добавлен в корзину</span>
+    </a>
+    <div class="goods"></div>
+    <div class="sum"><div>Итого: <span class="all"></span> <span class="ru1">?</span></div></div>
+    <a class="purchase" href="">Оформить заказ</a>
+    <div class="empty">
+        Корзина пуста
+    </div>
+</aside>
+
+<script id="cart-template" type="text/html">
+    <div class="string">
+        <a data-cart="[{id}]" class="del" href="">x</a>
+        <div class="name">
+            <a href="[{ref}]">[{name}]</a>
+        </div>
+        <div class="ctrl">
+            <a class="minus" href="">-</a><span data-cart="[{id}]" class="amount">[{amount}]</span><a class="plus" href="">+</a>
+        </div>
+        <div class="price-wrap"><span class="price"></span> <span class="ru">?</span></div>
+    </div>
+</script>
+
+<script id="form-template" type="text/html">
+    <div class="string">
+        <img class="img" src="[{formImg}]" alt=""/>
+        <div class="name">
+            <input name="id[]" type="hidden" value="[{id}]"/>
+            [{name}]
+            <div class="price">[{price}] <span class="ru1">?</span></div>
+        </div>
+        <div class="ctrl">
+            <a class="minus" href="">-</a><input name="amount[]" maxlength="3" data-filter='{"charFilter":"[0-9]","valueFilter":"^[0-9]+$"}' type="text" data-cart="[{id}]" class="amount" value="[{amount}]" /><a class="plus" href="">+</a>
+        </div>
+        <div class="p-wrap"><span class="p-block"><span class="p-price"></span> <span class="ru1">?</span></span></div>
+        <a data-cart="[{id}]" class="del" href=""></a>
+    </div>
+</script>

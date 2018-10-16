@@ -1,0 +1,68 @@
+@include exports("select"){
+  $prefix:'.custom-select';
+  #{$prefix}{
+    display:inline-block;
+    position:relative;
+    white-space:nowrap;
+    line-height:34px;
+    &:focus{
+      outline:none;
+    }
+    &.focused #{$prefix}-chosen{
+
+    }
+    &.opened #{$prefix}-list-wrap{
+      visibility:visible;
+    }
+    #{$prefix}-chosen{
+      padding-left:12px;
+      cursor:pointer;
+      border:4px solid $gray;
+      height:34px;
+      &:before{
+        content:'';
+        @include abs($t:15px,$r:16px);
+        @include trf(rotate(45deg));
+        width:8px;
+        height:8px;
+        border-right:1px solid #000;
+        border-bottom:1px solid #000;
+      }
+    }
+    #{$prefix}-list-wrap{
+      position:absolute;
+      visibility:hidden;
+      border:4px solid $gray;
+      background:#fff;
+      top:100%;
+      margin-top:-4px;
+      min-width:100%;
+      @extend %bxz;
+      overflow:auto;
+      z-index:1;
+    }
+    #{$prefix}-list{
+      position:relative;
+    }
+    #{$prefix}-item{
+      cursor:pointer;
+      padding-left:12px;
+      &:nth-child(n+2){
+        border-top:4px solid $gray;
+      }
+      &:hover{
+        background:#777;
+        color:#fff;
+      }
+      &.selected{
+        background:#eee;
+        color:#000;
+      }
+      &.disabled{
+        color:#bbb;
+        background:#ddd;
+        cursor:default;
+      }
+    }
+  }
+}

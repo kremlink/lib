@@ -1,0 +1,54 @@
+<style>
+.cookie-usage{
+	position:relative;
+	background:#eee;
+	width:100%;
+}
+.cookie-usage div{
+	padding:10px 40px;
+	max-width:800px;
+	margin:0 auto;
+	position:relative;
+}
+.cookie-usage a{
+	color:#f00;
+	text-decoration:underline;
+	background:none;
+}
+.cookie-usage a:hover{
+	text-decoration:none;
+}
+.cookie-usage a:last-child{
+	position:absolute;
+	top:50%;
+	right:10px;
+	width:16px;
+	height:16px;
+	-webkit-transform:translate(0, -50%);
+	transform:translate(0, -50%);
+}
+.cookie-usage a:last-child:before,
+.cookie-usage a:last-child:after{
+	content:'';
+	position:absolute;
+	left:50%;
+	top:50%;
+	width:22px;
+	height:3px;
+	background:#f00;
+	-webkit-transform:translate(-50%, -50%) rotate(45deg);
+	transform:translate(-50%, -50%) rotate(45deg);
+}
+.cookie-usage a:last-child:after{
+	-webkit-transform:translate(-50%, -50%) rotate(-45deg);
+	transform:translate(-50%, -50%) rotate(-45deg);
+}
+</style>
+<div class="cookie-usage">
+<div>
+	By continuing to use this site you consent to the use of cookies on your device as described in our
+	<a href="">cookie policy</a> unless you have disabled them. You can change your
+	<a href="">cookie settings</a> at any time but parts of our site will not function correctly without them.
+	<a href="" onclick="this.parentNode.style.display='none';return false;"></a>
+</div>
+</div>

@@ -1,0 +1,20 @@
+1. Apteka, catalog: range select+inputs - no steps; custom select (2014)
+2. Ts, index: horizontal drag block with justified content (2015-2016)
+3. Mage, index: horizontal drag block with refs (2015-2016)
+3. Eldom, cleaning pop: range select - steps, nice printing hack and map routes. (2017)
+4. Crm (bo.lo): structure; print.
+5. Ifootage, catalog: video play on hover inside or in the pop. (2017)
+             product: custom player.
+6. Artv, index: timeline.
+7. Gbread, index: cart, rotator (2016).
+         classes: datepick with dates list combined with pop.
+8. Slt, index: responsive height slider.
+9. Skazbuka, index: moving bgs to the mouse with inertion (2017).
+10. Ples, index: header mutation, box (2017)
+            all: flex template, responsive scaled markup
+11. Bluefox corp id: simple goods adder with calc and autocomplete (commented filtering and format)
+12. Luxvann: nice countdown
+13. Bluefox/dg-new: form with simple file + validation
+14. Ok (once), Bluefox/dg-new (shows/hides): animation of blocks on scroll.
+15. Tyres: responsive carousel (services), menu hides on scroll down.
+16. Vash/base: media query with object (see params and index.js/all.js)

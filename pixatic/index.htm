@@ -1,0 +1,255 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0047)http://www.pixastic.com/lib/docs/actions/blend/ -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Pixastic: JavaScript Image Processing : Blend</title>
+
+<meta name="description" content="Pixastic is an image processing library written in JavaScript. This page includes information and demos for the Blend filter.">
+<meta name="keywords" content="">
+<link rel="alternate" type="application/rss+xml" title="Nihilogic - Main blog" href="http://feeds2.feedburner.com/nihilogic">
+
+<link rel="stylesheet" type="text/css" href="./index_files/styles.css">
+<style type="text/css"></style>
+
+<script type="text/javascript"><!--
+var pixastic_parseonload = true;
+--></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<!--<script type="text/javascript" src="/lib/pixastic.custom.js"></script>-->
+<script type="text/javascript" src="./index_files/pixastic.core.js"></script>
+<script type="text/javascript" src="./index_files/pixastic.jquery.js"></script>
+<script type="text/javascript" src="./index_files/blend.js"></script>
+<script defer="" src="http:///" id="__onload_ie_pixastic__"></script>
+
+<!--
+<script type="text/javascript" src="../../../jquery/jquery-1.2.6.min.js"></script>
+<script type="text/javascript" src="../../../jquery/ui/jquery-ui-personalized-1.6rc2.min.js"></script>
+-->
+<script type="text/javascript" src="./index_files/jquery-1.2.6.min(1).js"></script>
+<script type="text/javascript" src="./index_files/jquery-ui-1.6.custom.min.js"></script>
+<link rel="stylesheet" href="./index_files/flora.all.css" type="text/css" media="screen">
+
+
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+	$("#actiontabs > ul").tabs();
+});
+
+function resetDemo() {
+	Pixastic.revert(document.getElementById("demoimage"));
+}
+
+</script>
+
+</head>
+<body cz-shortcut-listen="true">
+<a name="top"></a>
+<div id="mainwrap">
+  <div id="header">
+    <div id="topmenuwrap">
+      <span class="topmenuitem"><a href="http://www.pixastic.com/lib/docs/" title="Play with the demos and learn more about how to use Pixastic">Documentation</a></span>
+      <span class="topmenuitem"><a href="http://www.pixastic.com/lib/download/" title="Download the Pixastic library">Download</a></span>
+      <span class="topmenuitem"><a href="http://www.nihilogic.dk/" target="_blank" title="Visit the Nihilogic blog for more JavaScript experiments">Blog</a></span>
+      <span class="topmenuitem"><a href="mailto:jseidelin@nihilogic.dk" title="Send me email!">Contact</a></span>
+      <span class="topmenuitem" style="position:relative;top:6px;"></span>
+    </div>
+
+
+    <div id="headerimagewrap">
+      <a href="http://www.pixastic.com/lib/"><img src="./index_files/pixastic.png" alt="Pixastic home"></a>
+    </div>
+    <div id="headertagline">JavaScript Image Processing Library</div>
+  </div>
+
+  <div id="contentwrap">
+
+    <div id="main" class="dialog">
+        <div class="content-box-top"></div>
+        <div class="content content-box-mid">
+
+
+
+<h1 class="action-header"><a href="http://www.pixastic.com/lib/docs/">Documentation</a>: Blend</h1>
+<h3>Description</h3>
+
+<p class="action-description">This action lets you blend two images using different blend modes like the ones available in Photoshop (multiply, screen, exclusion, difference, etc.). You can use either an <code>img</code> element or a <code>canvas</code> element for the "blend image". It expects the images to be the same size but will simply crop the blend image if it's too large or leave untouched areas if it's smaller then the base image.</p>
+
+<div id="actiontabs">
+	<ul class="ui-tabs-nav">
+		<li class="ui-tabs-selected"><a href="http://www.pixastic.com/lib/docs/actions/blend/#tabdemo"><span>Demo</span></a></li>
+		<li class=""><a href="http://www.pixastic.com/lib/docs/actions/blend/#tabexamplecode"><span>Example code</span></a></li>
+		<li class=""><a href="http://www.pixastic.com/lib/docs/actions/blend/#tabparameters"><span>Parameters</span></a></li>	</ul>
+	<div id="tabdemo" class="ui-tabs-panel">
+
+		<h3>Demo</h3><div class="actiondemo">
+<script type="text/javascript">
+function demo() {
+	Pixastic.process(document.getElementById("demoimage"), "blend", {
+		amount : $("#value-amount").val(),
+		mode : $("#value-mode").val(),
+		image : $("#blendimage").get(0)
+	});
+}
+
+</script>
+
+<div class="demo-options">
+
+<div>Amount: <input type="text" id="value-amount" value="0" class="demo-input" style="width:30px;"></div>
+<div id="slider-amount" class="ui-slider" style="width:150px;margin-top:5px;margin-bottom:5px;">
+	<a href="http://www.pixastic.com/lib/docs/actions/blend/#" style="outline:none;border:none;"><div class="ui-slider-handle" style="left: 138px;"></div></a><div class="ui-slider-range"></div>
+</div>
+
+
+<script type="text/javascript"><!--
+$(document).ready(function(){
+	$("#slider-amount").slider({
+			slide: function() {
+				$("#value-amount").val(($("#slider-amount").slider("value") / 100).toFixed(1));
+			}
+	}).slider("moveTo", 100);
+});
+--></script>
+Mode:
+<select id="value-mode" class="demo-select">
+<option value="normal">Normal</option>
+<option value="multiply">Multiply</option>
+<option value="lighten">Lighten</option>
+<option value="darken">Darken</option>
+<option value="darkercolor">Darker Color</option>
+<option value="lightercolor">Lighter Color</option>
+<option value="difference">Difference</option>
+<option value="screen">Screen</option>
+<option value="exclusion">Exclusion</option>
+<option value="overlay">Overlay</option>
+<option value="softlight">Soft Light</option>
+<option value="hardlight">Hard Light</option>
+<option value="colordodge">Color Dodge</option>
+<option value="colorburn">Color Burn</option>
+<option value="lineardodge">Linear Dodge</option>
+<option value="linearburn">Linear Burn</option>
+<option value="linearlight">Linear Light</option>
+<option value="vividlight">Vivid Light</option>
+<option value="pinlight">Pin Light</option>
+<option value="hardmix">Hard Mix</option>
+</select><br>
+
+<input type="button" onclick="demo();" value="Blend">
+<input type="button" onclick="resetDemo();" value="Reset"><br>
+
+<br>
+Blend image:<br>
+<img src="./index_files/Flower.jpg" id="blendimage" style="margin-top:5px;width:150px;" alt="">
+
+</div>
+
+<img src="./index_files/Butterfly.jpg" id="demoimage" style="margin-top:5px;" alt=""></div></div>
+	<div id="tabexamplecode" class="ui-tabs-panel ui-tabs-hide">
+		<h3>Example usage</h3><div class="code"><pre class="javascript">var img = new Image();
+img.onload = function() {
+	var blendImg = new Image();
+	blendImg.onload = function() {
+		Pixastic.process(img, "blend", 
+			{
+				amount : 1, 
+				mode : "multiply", 
+				image : blendImg
+			}
+		);
+	}
+	blendImg.src = "blendimage.jpg";
+}
+img.src = "myimage.jpg";
+</pre></div></div>
+	<div id="tabparameters" class="ui-tabs-panel ui-tabs-hide">
+		<h3>Parameters</h3><ul class="action-options-list"><li><span class="option-desc"><span class="option-name">amount</span> (<span class="option-type">float</span>)<br>Amount of the image to blend. Value between 0 and 1.</span></li><li><span class="option-desc"><span class="option-name">mode</span> (<span class="option-type">string</span>)<br>The blend mode. One of "normal", "multiply", "lighten", "darken", "lightercolor", "darkercolor", "difference", "screen", "exclusion", "overlay", "softlight", "hardlight", "colordodge", "colorburn", "lineardodge", "linearburn", "linearlight", "vividlight", "pinlight", "hardmix".</span></li><li><span class="option-desc"><span class="option-name">image</span> (<span class="option-type">image</span>)<br>Image element to blend with original image.</span></li></ul>	</div></div>
+
+<p class="view-source">View source: <a href="http://www.pixastic.com/lib/git/pixastic/actions/blend.js" class="view-source-link">blend.js</a></p>
+
+<h3>Browser support</h3>
+<p>
+<script type="text/javascript"><!--
+
+var clients = [
+	{
+		name : "Internet Explorer 5.5+",
+		icon : "icon_ie7.png",
+		link : "http://www.microsoft.com/windows/products/winfamily/ie/default.mspx",
+		hasCanvas : function() { return false },
+		hasCanvasImageData : function() { return false },
+		isIE : function() { return true }
+	},
+	{
+		name : "Opera 9+",
+		icon : "icon_opera.png",
+		link : "http://www.opera.com/",
+		hasCanvas : function() { return true },
+		hasCanvasImageData : function() { this.name = "Opera 9.5+"; return true },
+		isIE : function() { return false }
+	},
+	{
+		name : "Firefox 2+",
+		icon : "icon_firefox.png",
+		link : "http://www.mozilla.com/firefox/",
+		hasCanvas : function() { return true },
+		hasCanvasImageData : function() { return true },
+		isIE : function() { return false }
+	},
+	{
+		name : "Safari 3+",
+		icon : "icon_safari.png",
+		link : "http://www.apple.com/safari/",
+		hasCanvas : function() { return true },
+		hasCanvasImageData : function() { return false },
+		isIE : function() { return false }
+	},
+	{
+		name : "WebKit Nightly",
+		icon : "icon_webkit.png",
+		link : "http://nightly.webkit.org/",
+		hasCanvas : function() { return true },
+		hasCanvasImageData : function() { return true },
+		isIE : function() { return false }
+	}
+];
+
+var realClient = Pixastic.Client;
+var action = Pixastic.Actions["blend"];
+
+for (var i=0;i<clients.length;i++) {
+	var client = clients[i];
+	Pixastic.Client = client;
+	if (action.checkSupport()) {
+		document.write(
+			"<span class=\"actionbrowsersupport\"><a href=\"" + client.link + "\" target=\"_blank\"><img src=\"/lib/" + client.icon + "\" alt=\"" + client.name + "\" title=\"" + client.name + "\">"
+			+ client.name + "</a></span>"
+		);
+	}
+}
+
+Pixastic.Client = realClient;
+
+--></script><span class="actionbrowsersupport"><a href="http://www.opera.com/" target="_blank"><img src="./index_files/icon_opera.png" alt="Opera 9.5+" title="Opera 9.5+">Opera 9.5+</a></span><span class="actionbrowsersupport"><a href="http://www.mozilla.com/firefox/" target="_blank"><img src="./index_files/icon_firefox.png" alt="Firefox 2+" title="Firefox 2+">Firefox 2+</a></span><span class="actionbrowsersupport"><a href="http://nightly.webkit.org/" target="_blank"><img src="./index_files/icon_webkit.png" alt="WebKit Nightly" title="WebKit Nightly">WebKit Nightly</a></span>
+
+</p>
+	<p></p>
+      </div>
+      <div class="content-box-bottom"></div>
+    </div>
+  </div>
+
+<div id="footer">
+
+<img src="./index_files/valid_xhtml10_80x15_22.png" alt="Valid XHTML 1.0" class="footer-badge">
+<a href="http://blog.nihilogic.dk/" class="bottom-copyright">© 2008-2009 Jacob Seidelin</a>
+Hosted by <a href="http://www.knownhost.com/affiliate/idevaffiliate.php?id=445">KnownHost</a>
+
+</div>
+</div>
+
+
+
+
+</body></html>

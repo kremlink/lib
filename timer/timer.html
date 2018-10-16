@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html class="vacancies">
+    <head>
+		<meta charset="utf-8" />
+		<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+		<title></title>
+		<meta name="Keywords" content="" />
+		<meta name="Description" content="" />
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script src="mustache.js"></script>
+        <script>
+        var SiteManager={lib:{}};
+        
+        Mustache.tags=["[{", "}]"];
+        
+        $(document).ready(function(){
+         var tt=new SiteManager.lib['Timer']({
+          //time:60000,
+          add:{
+           caller:'#add span',
+           name:'#add input'
+          },
+          container:'#timer',
+          template:{
+           selector:'#template',
+           block:'.block',
+           time:'.time',
+           startPause:{selector:'.start-pause',text:['Start','Pause']},
+           remove:'.remove'
+          },
+          format:function(n){
+           var h=Math.floor(n/60/60/1000),
+               m=Math.floor((n-h*60*60*1000)/60/1000),
+               s=Math.floor((n-h*60*60*1000-m*60*1000)/1000);
+           
+           return h+':'+(m<=9?'0'+m:m)+':'+(s<=9?'0'+s:s);
+          }
+         });
+        });
+        </script>
+        <script src="timer.js"></script>
+	</head>
+	<body>
+        <div id="add">
+            <input type="text" /> <span>Добавить</span>
+        </div>
+		<div id="timer" style="width:600px;margin:100px auto 0 auto;font-size:20px;">
+            
+        </div>
+        <script id="template" type="text/html">
+            <div class="block">
+                <span class="time">[{time}]</span>
+                <span class="name">[{name}]</span>
+                <span data-name="[{name}]" class="start-pause"></span>
+                <span data-name="[{name}]" class="remove">Remove</span>
+            </div>
+        </script>
+	</body>
+</html>

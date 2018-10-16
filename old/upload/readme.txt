@@ -1,0 +1,1 @@
+html5-upload doesn't need files from lib dir

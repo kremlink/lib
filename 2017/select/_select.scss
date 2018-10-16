@@ -1,0 +1,67 @@
+@include exports("@path:components\_select.scss"){/*@path:components\_select.scss*/
+  $prefix:'.custom-select';
+  #{$prefix}{
+    position:relative;
+    white-space:nowrap;
+    line-height:34px;
+    margin-top:3px;
+    background:#fff;
+    &:focus{
+      outline:none;
+    }
+    &.focused #{$prefix}-chosen{
+
+    }
+    &.opened #{$prefix}-list-wrap{
+      visibility:visible;
+    }
+    #{$prefix}-chosen{
+      padding-left:16px;
+      cursor:pointer;
+      border:1px solid getc(gray);
+      height:34px;
+      &:before{
+        content:'';
+        @include abs($r:16px,$t:10px);
+        @include trf(rotate(45deg));
+        border-right:2px solid getc('bdr.form-bdr');
+        border-bottom:2px solid getc('bdr.form-bdr');
+        width:9px;
+        height:9px;
+      }
+    }
+    #{$prefix}-list-wrap{
+      position:absolute;
+      visibility:hidden;
+      border:1px solid getc(gray);
+      border-top:none;
+      background:#fff;
+      top:100%;
+      margin-top:-1px;
+      min-width:100%;
+      @extend %bxz;
+      overflow:auto;
+      z-index:1;
+    }
+    #{$prefix}-list{
+      position:relative;
+    }
+    #{$prefix}-item{
+      cursor:pointer;
+      padding-left:12px;
+      &:hover{
+        background:#777;
+        color:#fff;
+      }
+      &.selected{
+        background:#eee;
+        color:#000;
+      }
+      &.disabled{
+        color:#bbb;
+        background:#ddd;
+        cursor:default;
+      }
+    }
+  }
+}

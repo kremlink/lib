@@ -1,0 +1,12 @@
+1. imagesLoaded check
+2. Loader show time threshold
+3. Simplify it overall somehow
+4. Divide exterior and interior methods
+5. make method for getting data so that the interface was the same for data and href/title
+5+. get array of data from 1 ref
+6. Add data- attrs which will control type (image, html, etc)
+7. .wrap2.box{
+     @include trs(all .5s ease-in-out);
+   }
+and effect:'opacity' not working. Needs transition property to be changed
+8. mousemove zoom without scrollbars?
