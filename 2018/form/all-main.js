@@ -32,65 +32,92 @@
    }
    */
    
-   /*
+   
    extra:{
     err:'error',
-    data:'what',
-    fileWrap:function(obj){
-     return obj.closest('.upload');
-    },
-    $fCaller:'.add-user-block .btn-red',
-    $fName:'.add-user-block .u-name',
-    upload:{
-        acceptFileTypes:/(\.|\/)(png|jpg)$/i,
-        maxFileSize:100000
-    }
+    $upload:{
+      $cont:'.order-form .upload',
+      $files:'.order-form .upload input',
+      $callers:'.order-form .att',
+      $names:'.order-form .name',
+      $del:'.order-form .rem',
+      acceptFileTypes:/.*/i,
+      maxSize:10000000,
+      added:'added'
+     }
    }
-   */
+  
+   <div class="upload">
+		Ваш логотип
+		<div class="add">
+			<div class="att">Прикрепить</div>
+			<div class="name"></div>
+			<div class="rem">&times;</div>
+		</div>
+		<input type="file" name="files[]"/>
+	</div>
    //------------------------------------------------------
    //------------------------------------------------------
   var formData={
     events:{
      init:function(e,opts){
-      var u=this.get('data').extra;
+      var u=this.get('data').extra,
+       clr;
 
-      opts.form.on('focus','input[type=text],input[type=password],textarea,select',function(){
-       $(this).removeClass(u.err);
-      });
-	  
-	  if(u.$upload)
-       {
-        u.$upload.$file.on('change',function(){
-         var f=u.$upload.$file[0].files[0],
+     if(u.$upload)//see example markup and data above
+     {
+      clr=function(i){
+       u.$upload.$files.eq(i).wrap('<form>').closest('form').get(0).reset();
+       u.$upload.$files.eq(i).unwrap();
+      };
+
+      u.$upload.$files.each(function(i){
+       var obj=$(this);
+
+       obj.on('change',function(){
+        var f=obj[0].files[0],
          err=mgr.get('lib.utils.fValid')({file:f,type:u.$upload.acceptFileTypes,max:u.$upload.maxSize});
 
-         if(err.max)
+        if(err.max)
+        {
+         alert('Превышен максимально допустимый размер файла');
+         clr(i);
+        }else
+        {
+         if(err.type)
          {
-          alert('Превышен максимально допустимый размер файла');
+          alert('Неподходящий тип файла');
+          clr(i);
          }else
          {
-          if(err.type)
+          if(f)
           {
-           alert('Неподходящий тип файла');
-          }else
-          {
-           if(f)
-           {
-            u.$upload.$caller.text(f.name);//$fInput.val().match(/[^\\]*\.(\w+)$/)[0]
-            u.$upload.$cont.removeClass(u.err);
-           }
+           u.$upload.$names.eq(i).text(f.name.match(/[^\\]*\.(\w+)$/)[0]);
+           u.$upload.$cont.eq(i).addClass(u.$upload.added);
           }
          }
-        });
-       }
+        }
+       });
+      });
 
-      /*u.$fCaller.each(function(i){
+      u.$upload.$callers.each(function(i){
        $(this).on('click',function(e){
-        files.eq(i)[0].click();
+        u.$upload.$files.eq(i)[0].click();
 
         e.preventDefault();
        });
-      });*/
+      });
+
+      u.$upload.$del.each(function(i){
+       $(this).on('click',function(e){
+        u.$upload.$cont.eq(i).removeClass(u.$upload.added);
+        u.$upload.$names.eq(i).text('');
+        clr(i);
+
+        e.preventDefault();
+       });
+      });
+     }
      }
     },
     validate:function(opts){
