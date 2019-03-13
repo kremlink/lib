@@ -223,7 +223,7 @@
    });
 
    if(!self.options.helpers.drag)
-    throw new Error('No drag handler set! ['+self.getInner('PATH')+']');
+    throw new Error('No drag handler set! ['+self.get('data').path_+']');
 
    self.props.touch=new (self.options.helpers.drag)($.extend({
     horizontal:self.options.horizontal,

@@ -9,11 +9,11 @@ drag:{
      },
      options:{
       horizontal:true,
+	  wheel:true,
       touch:{mouse:true}
      },
      extra:{
       bar:null,
-      cls:'hidden',
       dragging:'dragging'
      }
     },
@@ -28,7 +28,8 @@ drag:{
      extra:{
       block:null,
       time:200,
-      dragging:'dragging'
+      dragging:'dragging',
+	  cls:'hidden'
      }
     }
    }
@@ -98,8 +99,8 @@ drag:{
        self=this,
        d,t,
        db=mgr.get('lib.utils.debounce')(function(){
-        d=u.block.get('getData');
-        /*t=d.items.eq(0).width();
+        /*d=u.block.get('getData');
+        t=d.items.eq(0).width();
         if(t*3+u.margin*2<=d.wrapDim&&t*4+u.margin*3>d.wrapDim)
          u.block.get('setLength',3);
         if(t*4+u.margin*3<=d.wrapDim&&t*5+u.margin*4>d.wrapDim)
@@ -107,10 +108,16 @@ drag:{
         if(t*5+u.margin*4<=d.wrapDim&&t*6+u.margin*5>d.wrapDim)
          u.block.get('setLength',5);*/
 
-        if(!d.stopResize)
-         u.block.get('recalc');
-        if(!self.get('getData').stopResize)
-         self.get('resize');
+        if(!u.block.get('getData').stopResize)
+          u.block.get('recalc');
+         if(!self.get('getData').stopResize)
+         {
+          d=u.block.get('getData');
+          self.get('resize');
+          if(!d.hide)
+           self.get('setBarDim',[d.wrapDim/d.blockDim*self.get('getData').holderDim]);
+          self.get('getData').container[(d.hide?'add':'remove')+'Class'](u.cls);
+         }
        },u.time);
 
       mgr.helpers.win.on('resize',function(){
@@ -164,10 +171,6 @@ drag:{
 
       if(u.bar&&!opts.external)
       {
-       if(opts.resize&&!opts.hide)
-        u.bar.get('setBarDim',[opts.wrapDim/opts.blockDim*u.bar.get('getData').holderDim]);
-       u.bar.get('getData').container[(opts.hide?'add':'remove')+'Class'](u.cls);
-
        u.bar.get('setPosition',{
         value:opts.hide?[0]:[-opts.value*u.bar.get('getData').bounds[1]/opts.dim],
         external:true,

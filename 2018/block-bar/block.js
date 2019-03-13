@@ -115,7 +115,8 @@
     wrapDim:self.props.wrapDim,
     blockDim:self.props.blockDim,
     dim:self.props.blockDim-self.props.wrapDim,
-    stopResize:self.props.stopResize
+    stopResize:self.props.stopResize,
+	hide:self.props.hide
    };
   },
   setLength:function(v){
