@@ -60,7 +60,7 @@
   },
   prepare:function(){
    var self=this,
-       db=self.data.helpers&&$.type(self.data.helpers.debounce)==='function'?self.data.helpers.debounce(function(){
+       db=self.options.helpers&&$.type(self.options.helpers.debounce)==='function'?self.options.helpers.debounce(function(){
         self.onResizeAndScroll();
        },self.options.time):(function(){
         throw new Error('No debounce function set! ['+self.get('data').path_+']')

@@ -1,199 +1,104 @@
-@mixin box-ie-title-grad($o){
-  filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#99000000',endColorstr='#99000000'),
-         progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$o});
+.overlay{
+  @include abs($l:0,$t:0,$r:0,$b:0,$p:fixed);
+  visibility:hidden;
+  opacity:0;
+  z-index:1;
+  background:#fff;
+  @include trs('opacity #{$anim} ease-in-out');
+  &.active{
+    visibility:visible;
+    opacity:0.5;
+  }
 }
-
-@mixin box-elements-opacity($o){
-  opacity:$o;
-  //filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$o*100});
-}
-
-@include exports("@path:components\_box.scss"){/*@path:components\_box.scss*/
-  $prefix:'.box-pop';
-  #{$prefix}{
-    position:fixed;
-    left:-5000px;
-    top:0;
-    width:100%;
-    height:100%;
-    z-index:3;
-    overflow:auto;
-    &#{$prefix}-shown{
-      left:0;
-    }
-    &#{$prefix}-hide-ctrls{
-      #{$prefix}-close{
-        display:none;
-      }
-      #{$prefix}-prev,#{$prefix}-next{
-        display:none;
-      }
-    }
-    &#{$prefix}-unblock{
-      #{$prefix}-content:after{
-        pointer-events:none;
-      }
-    }
-    #{$prefix}-viewport{
-      @include abs($l:20px,$r:20px,$t:20px,$b:20px);
-    }
-    #{$prefix}-center{
-      @include abs($l:50%,$t:50%);
-      @extend %bxz;
-      &#{$prefix}-bg #{$prefix}-wrap:before{
-        background:#eee;
-      }
-      &#{$prefix}-no-bg #{$prefix}-wrap:before{
-        //background:none;
-      }
-      &:hover #{$prefix}-title{
-        opacity:1;
-        @include trs('opacity .3s ease-in-out');
-        @include box-ie-title-grad($o:100);
-      }
-    }
-    #{$prefix}-wrap{//the only purpose - not include paddings in zoomed mode for controls positioning
-      position:relative;
-      width:100%;
-      height:100%;
-      &:before{
-        content:'';
-        @include abs($l:0,$t:0,$b:0,$r:0);
-        background:#fff;
-      }
-    }
-    #{$prefix}-close{
-      @include abs($r:-15px,$t:-15px);
-      @include sprite($n:close,$p:$box-sprite);
-      z-index:1;
-    }
-    #{$prefix}-prev,#{$prefix}-next{
-      @include abs($t:0,$b:0);
-      width:20%;
-      opacity:0;
-      visibility:hidden;
-      &#{$prefix}-ctrl-hidden,&#{$prefix}-ctrl-disabled{
-        display:none;
-      }
-      .ancient-browser &{
-        background:url(.);
-      }
-      &:before{
-        content:'';
-        @include abs($t:50%);
-        margin-top:-15px;
-      }
-    }
-    #{$prefix}-prev{
-      left:0;
-      &:before{
-        left:10px;
-        @include sprite($n:prev,$p:$box-sprite);
-      }
-    }
-    #{$prefix}-next{
-      right:0;
-      &:before{
-        left:auto;
-        right:10px;
-        @include sprite($n:next,$p:$box-sprite);
-      }
-    }
-    #{$prefix}-loader{
+$prefix:'.the-box-pop';
+.the-box-pop{
+  z-index:1;
+  @include abs($l:0,$t:0,$r:0,$b:0,$p:fixed);
+  visibility:hidden;
+  overflow:hidden;
+  &.active{
+    visibility:visible;
+  }
+  &.opening #{$prefix}-content{
+    background-color:#888;
+    @include trs('du','0s');
+  }
+  &.loading #{$prefix}-content:after{
+    opacity:1;
+  }
+  &.op-e #{$prefix}-inner{
+    @include trs('opacity #{$anim*2} ease-in-out,font-size #{$anim*2} ease-in-out');
+  }
+  &.dims-e #{$prefix}-inner{
+    @include trs('width #{$anim*2} ease-in-out,height #{$anim*2} ease-in-out,font-size #{$anim*2} ease-in-out');
+  }
+  &.sim-e #{$prefix}-inner{
+    @include trs('all #{$anim*2} ease-in-out');
+  }
+  &.ctrls #{$prefix}-prev,&.ctrls #{$prefix}-next{
+    display:block;
+  }
+  &.title #{$prefix}-title{
+    opacity:1;
+  }
+  &-vp{
+    @include abs($l:100px,$r:100px,$t:100px,$b:100px);
+  }
+  &-content{
+    @include center();
+    @include trs('background #{$anim} ease-in-out');
+    &:after{
+      content:'';
       @include abs($l:0,$r:0,$t:0,$b:0);
-      display:none;
+      opacity:0;
       @extend %loader;
     }
-    #{$prefix}-zoom{
-      @include abs($l:10px,$t:-5000px);
-      @include sprite($n:zoom-out,$p:$box-sprite);
-      cursor:pointer;
-    }
-    #{$prefix}-content{
-      position:relative;
-      opacity:0;
-      &:after{
-        content:'';
-        @include abs($l:0,$r:0,$t:0,$b:0);
-        box-shadow:0 0 20px #333;
-      }
-    }
-    #{$prefix}-content#{$prefix}-opacity{
-      @include trs('opacity .5s ease-in-out');
-    }
-    #{$prefix}-title{
-      color:#fff;
-      white-space:nowrap;
-      @include center($b:10px);
-      z-index:1;
-      font-size:16px;
-      padding:8px 10px;
-      background:rgba(#000,0.5);
-      opacity:0;
-      @extend %bxz;
-      @include box-ie-title-grad($o:0);
-    }
-    //--------base class applications
-    &#{$prefix}-stretch{
-      #{$prefix}-center#{$prefix}-dims{
-        @include trs('all .5s ease-in-out');
-      }
-      #{$prefix}-center#{$prefix}-opacity{
-        @include trs('font-size .5s ease-in-out');
-      }
-      #{$prefix}-content{
-        position:absolute;
-      }
-      #{$prefix}-image{
-        width:100%;
-        height:100%;
-      }
-      &#{$prefix}-zoomable #{$prefix}-zoom{
-        @include box-elements-opacity($o:0);
-        @include sprite($n:zoom-in,$p:$box-sprite);
-      }
-    }
-    &#{$prefix}-ready{
-      #{$prefix}-center:hover #{$prefix}-prev,#{$prefix}-center:hover #{$prefix}-next{
-        opacity:1;
-        visibility:visible;
-        @include trs('all .3s ease-in-out');
-      }
-    }
-    &#{$prefix}-loading #{$prefix}-loader{
-      display:block;
-    }
-    &#{$prefix}-zoomable{
-      #{$prefix}-center:hover #{$prefix}-zoom{
-        @include box-elements-opacity($o:1);
-        @include trs('opacity .3s ease-in-out');
-      }
-      #{$prefix}-zoom{
-        top:10px;
-        @include box-elements-opacity($o:0);
-      }
-    }
-    &#{$prefix}-min #{$prefix}-image{
-      width:0;
-      height:0;
+    img{
+      width:100%;
+      height:100%;
     }
   }
-
-  #{$prefix}-overlay{
-    position:fixed;
-    background:#000;
-    @include box-elements-opacity($o:0);
-    left:0;
-    top:-100%;
+  &-inner{
+    opacity:0;
+    @include trs('font-size #{$anim*2} ease-in-out');
+  }
+  &-prev,&-next{
+    @include center($f:v);
+    width:40px;
+    height:40px;
+    background:#eee;
+    border-radius:50%;
+    cursor:pointer;
+    display:none;
+  }
+  &-prev{
+    left:-50px;
+  }
+  &-next{
+    right:-50px;
+  }
+  &-title{
+    @include center($b:-50px);
+    color:#fff;
+    height:30px;
+    padding:0 10px;
+    border-radius:15px;
+    background:#ddd;
+    line-height:30px;
+    opacity:0;
+    @include trs('opacity #{$anim*2} ease-in-out');
+  }
+  &-close{
+    width:40px;
+    height:40px;
+    background:#eee;
+    border-radius:50%;
+    cursor:pointer;
+    @include abs($t:-25px,$r:-25px);
+  }
+  .ololo{
+    background:#f00;
     width:100%;
     height:100%;
-    z-index:3;
-    &#{$prefix}-active{
-      top:0;
-    }
-    &#{$prefix}-trs{
-      opacity:0.5;
-      @include trs('opacity .3s ease-in-out');
-    }
   }
 }

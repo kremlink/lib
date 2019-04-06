@@ -197,7 +197,8 @@
     bounds:self.props.bounds,
     resize:opts.resize,
     ini:opts.ini,
-    external:opts.external
+    external:opts.external,
+    data:opts.data
    }]);
   },
   stopResize:function(f){
