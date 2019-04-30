@@ -1,54 +1,65 @@
-<style>
-.cookie-usage{
-	position:relative;
-	background:#eee;
-	width:100%;
-}
-.cookie-usage div{
-	padding:10px 40px;
-	max-width:800px;
-	margin:0 auto;
-	position:relative;
-}
-.cookie-usage a{
-	color:#f00;
-	text-decoration:underline;
-	background:none;
-}
-.cookie-usage a:hover{
-	text-decoration:none;
-}
-.cookie-usage a:last-child{
-	position:absolute;
-	top:50%;
-	right:10px;
-	width:16px;
-	height:16px;
-	-webkit-transform:translate(0, -50%);
-	transform:translate(0, -50%);
-}
-.cookie-usage a:last-child:before,
-.cookie-usage a:last-child:after{
-	content:'';
-	position:absolute;
-	left:50%;
-	top:50%;
-	width:22px;
-	height:3px;
-	background:#f00;
-	-webkit-transform:translate(-50%, -50%) rotate(45deg);
-	transform:translate(-50%, -50%) rotate(45deg);
-}
-.cookie-usage a:last-child:after{
-	-webkit-transform:translate(-50%, -50%) rotate(-45deg);
-	transform:translate(-50%, -50%) rotate(-45deg);
-}
-</style>
-<div class="cookie-usage">
-<div>
-	By continuing to use this site you consent to the use of cookies on your device as described in our
-	<a href="">cookie policy</a> unless you have disabled them. You can change your
-	<a href="">cookie settings</a> at any time but parts of our site will not function correctly without them.
-	<a href="" onclick="this.parentNode.style.display='none';return false;"></a>
-</div>
-</div>
+                <style>
+                    #wrap{
+                        min-width:320px;
+                    }
+                    .cookie-usage{
+                        position:absolute;
+                        left:0;
+                        right:0;
+                        top:0;
+                        z-index:2;
+                        background:#ffb602;
+                        height:100px;
+                        font-size:18px;
+                        line-height:24px;
+                        display:flex;
+                        align-items:center;
+                    }
+                    .cookie-usage div{
+                        padding:0 370px 0 60px;
+                        width:100%;
+                        position:relative;
+                    }
+                    .cookie-usage a{
+                        color:#000;
+                        background:none;
+                        width:290px;
+                        height:54px;
+                        line-height:54px;
+                        font-size:35px;
+                        border:2px solid #000;
+                        position:absolute;
+                        right:60px;
+                        top:50%;
+                        margin-top:-29px;
+                        text-align:center;
+                        text-decoration:none;
+                    }
+                    @media(max-width:810px)
+                    {
+                        .cookie-usage{
+                            font-size:14px;
+                            line-height:18px;
+                            height:auto;
+                            padding:10px 0;
+                        }
+                        .cookie-usage div{
+                            padding:0 140px 0 20px;
+                        }
+                        .cookie-usage a{
+                            width:100px;
+                            height:34px;
+                            line-height:34px;
+                            font-size:16px;
+                            margin-top:-19px;
+                            right:20px;
+                        }
+                    }
+                </style>
+                <div class="cookie-usage">
+                    <div>
+                        Сайт Дока использует cookies. Это нужно исключительно
+                        для улучшения работы сайта и анализа качества контента.
+                        <a href="" onclick="this.parentNode.parentNode.style.display='none';return false;">ХОРОШО</a>
+                    </div>
+                </div>
