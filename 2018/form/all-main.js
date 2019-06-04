@@ -196,7 +196,7 @@
    $(function(){
     var formData=mgr.get('shared.form');
     
-    mgr.set({data:'index.form',object:'Form',on:formData.events,extra:{options:{funcs:{validate:formData.validate}}}});
+    mgr.set({data:'index.form',object:'Form',on:formData.events,add:{options:{funcs:{validate:formData.validate}}}});
     //mgr.get('form').method('show');
    });
   });

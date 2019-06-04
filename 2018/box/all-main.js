@@ -35,7 +35,7 @@
     }
    };
 
-   mgr.set({data:'index.box',object:'Box',on:box,extra:{options:{helpers:{debounce:mgr.get('lib.utils.debounce')},touch:{swipe:mgr.get('lib.utils.swipe')}}}});
+   mgr.set({data:'index.box',object:'Box',on:box,add:{options:{helpers:{debounce:mgr.get('lib.utils.debounce')},touch:{swipe:mgr.get('lib.utils.swipe')}}}});
   }
  });
 }));

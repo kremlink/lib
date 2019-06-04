@@ -62,9 +62,9 @@
    var cont=$(opts.data.container);
 
    cont.find('img').imagesLoaded(function(){
-    var obj=mgr.set({data:opts.name,object:'Slider',extra:{helpers:{swipe:mgr.get('lib.utils.swipe')}}});
+    var obj=mgr.set({data:opts.name,object:'Slider',add:{options:{helpers:{swipe:mgr.get('lib.utils.swipe')}}}});
 
-    cont.addClass(obj.getInner('extra').cls).height(obj.method('getData').elements.eq(0).height());
+    cont.addClass(obj.get('data').extra.cls).height(obj.method('getData').elements.eq(0).height());
    });
   };
   //------------------------
@@ -118,7 +118,7 @@
         if(c)
          c.destroy();
 
-        mgr.set({data:opts.name,object:'Carousel',extra:{visible:t},notify:false});
+        mgr.set({data:opts.name,object:'Carousel',add:{options:{visible:t}},notify:false});
        },extra.time);
 
    db();
@@ -127,10 +127,11 @@
    });
   };
   
-  var carousel={
+  var once=false,
+   carousel={
    init:function(){
     var self=this,
-         u=this.getInner('extra');
+         u=this.get('data').extra;
 
      u.$next.on('click',function(e){
       var d=self.getData();
@@ -141,6 +142,21 @@
       self.setScroll(u.fixScroll);
       e.preventDefault();
      });
+   },
+   before:function(e,opts){
+    var c=this.get('props').container;
+
+    if(~opts.next)
+    {
+     if(!once)
+     {
+      once=true;
+      c.height(opts.elements.eq(0).innerHeight());
+     }
+     setTimeout(function(){
+      c.height(opts.elements.eq(opts.next).innerHeight());
+     },0);
+    }
    }
   };
   //------------------------------------------------------

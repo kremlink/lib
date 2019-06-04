@@ -225,7 +225,7 @@ drag:{
        data:opts_.name+'.block',
        object:'Block',
        on:drag.block,
-       extra:$.extend(find(d.block.find,obj),{options:$.extend(d.block.options,{helpers:{drag:mgr.get('lib.utils.drag')}})}),
+       add:$.extend(find(d.block.find,obj),{options:$.extend(d.block.options,{helpers:{drag:mgr.get('lib.utils.drag')}})}),
        collection:true
       });
 
@@ -233,7 +233,7 @@ drag:{
        data:opts_.name+'.bar',
        object:'Bar',
        on:drag.bar,
-       extra:$.extend(find(d.bar.find,obj),{options:$.extend(d.bar.options,{helpers:{drag:mgr.get('lib.utils.drag')}})}),
+       add:$.extend(find(d.bar.find,obj),{options:$.extend(d.bar.options,{helpers:{drag:mgr.get('lib.utils.drag')}})}),
        collection:true
       });
 	  

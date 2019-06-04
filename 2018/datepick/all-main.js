@@ -38,7 +38,7 @@
    //------------------------------------------------------
    //------------------------------------------------------
    $(function(){
-    mgr.set({data:'classes.datepick',object:'Datepick',extra:{onDate:dp.onDate}})
+    mgr.set({data:'classes.datepick',object:'Datepick',add:{options:{onDate:dp.onDate}}})
    });
   });
  }
