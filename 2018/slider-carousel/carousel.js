@@ -231,7 +231,7 @@
        cDim=self.options.vertical?self.props.container.height():self.props.container.width(),
        elDim=self.options.vertical?self.props.elements.eq(0).outerHeight():self.props.elements.eq(0).outerWidth(),
        d=self.options.dim?elDim:Math.floor((cDim-(self.options.visible-1)*self.options.margin)/self.options.visible),
-       m=self.options.dim?Math.floor((cDim-self.options.visible*elDim)/(self.options.visible-1)):self.options.margin;
+       m=self.options.dim?Math.floor((cDim-self.options.visible*elDim)/(self.options.visible-1||1)):self.options.margin;
 
    if(!self.options.responsive)
    {
