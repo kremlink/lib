@@ -195,9 +195,6 @@
   onSelect:function(dates){
    var self=this;
 
-   if(self.options.ruMonthsEndings)
-    self.ruMonthEndings();
-
    self.trigger('select',[{
     dates:dates,
     caller:self.props.caller,
@@ -205,6 +202,9 @@
     input:self.props.input,
     external:self.props.external
    }]);
+
+   if(self.options.ruMonthsEndings)
+    self.ruMonthEndings();
   },
   onSelectDate:function(inst){
    var self=this;

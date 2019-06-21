@@ -35,6 +35,22 @@
      })))?{dateClass:u.inactive,selectable:false}:{};
     }
    };
+
+   datepick:{
+    container:'.service-block .date',
+     caller:'.service-block .d-caller span',
+     input:'.service-block .date input',
+     options:{
+     ruMonthsEndings:true,
+      callerFormat:'dd MM yyyy'
+    }
+   }
+
+   var datepick={
+    select:function(e,opts){
+     opts.caller.text($.datepick.formatDate(opts.format,opts.dates[0]));
+    }
+   }
    //------------------------------------------------------
    //------------------------------------------------------
    $(function(){
