@@ -353,7 +353,7 @@
     p=self.props,
     ops=self.options;
 
-   p.pop.item.removeClass(ops.cls.active+' '+ops.cls.opening+' '+ops.cls.loading+' '+ops.cls.ctrls+' '+ops.cls.title);
+   p.pop.item.removeClass(ops.cls.active+' '+ops.cls.opening+' '+ops.cls.loading+' '+ops.effect.cls[ops.effect.type]+' '+ops.cls.ctrls+' '+ops.cls.title);
    self.props.shown=false;
    p.pop.inner.css({width:ops.initialDims,height:ops.initialDims,opacity:0});
    self.trigger('close',{activeClass:ops.cls.active});
