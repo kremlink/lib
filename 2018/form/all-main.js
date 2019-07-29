@@ -19,6 +19,11 @@
     <div class="u-name"></div>
     <div class="u-rem">&times;</div>
    </div>
+
+   <label class="p-yes">
+    <input type="checkbox" name="yes"/>
+    Я ознакомлен(а) с условиями использования моих персональных данных и даю согласие на их обработку
+   </label>
     //---------------------------
     .upload{
     width:180px;
@@ -57,6 +62,11 @@
     text-align:center;
     @include center($l:-30px);
    }
+   //---
+  &.no .the-btn{
+    opacity:0.4;
+    pointer-events:none;
+   }
    //------------------------
    //------------------------
    'all.theForm':{options:{url:'upload.php'},extra:{$upload:{maxSize:10000000}}}
@@ -83,6 +93,10 @@
        acceptFileTypes:/(\.|\/)(png|jpg)$/i,
        maxSize:0,
        added:'added'
+      },
+      $agree:{
+       no:'no',
+       $yes:'.contacts-block .p-yes input'
       }
      }
     }
@@ -159,6 +173,13 @@
           e.preventDefault();
          });
         });
+       }
+
+       if(u.$agree)
+       {
+        u.$agree.$yes.on('change',function(){
+         opts.form[(u.$agree.$yes.is(':checked')?'remove':'add')+'Class'](u.$agree.no);
+        }).trigger('change');
        }
       },
       sending:function(e,opts){
