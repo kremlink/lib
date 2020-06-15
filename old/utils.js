@@ -118,7 +118,8 @@
     coords:{pageX:0,pageY:0},
     start:{pageX:0,pageY:0},
     mousedownFn:[],
-    dragFn:[]
+    dragFn:[],
+    upFn:null
    }
   };
 
@@ -161,7 +162,7 @@
 
      if(self.props.dragging&&
       (self.options.mouse&&!e.touches||self.options.both||
-      Math.abs(touch.coords[c]-d[c])>self.options.mult*Math.abs(touch.coords[c1]-d[c1])))
+       Math.abs(touch.coords[c]-d[c])>self.options.mult*Math.abs(touch.coords[c1]-d[c1])))
      {
       touch.coords['pageX']=d['pageX'];
       touch.coords['pageY']=d['pageY'];
@@ -180,14 +181,16 @@
     eventjs.add(this,'drag',touch.dragFn[i]);
    });
 
-   eventjs.add(document,'mouseup',function(){
+   self.props.touch.upFn=function(e){
     if(self.props.dragging)
     {
      self.props.dragging=false;
      self.props.dragStart=false;
-     self.options.upCallback();
+     self.options.upCallback(e);
     }
-   });
+   };
+
+   eventjs.add(document,'mouseup',self.props.touch.upFn);
   },
   disable:function(){
    var self=this;
@@ -195,6 +198,7 @@
    self.props.container.each(function(i){
     eventjs.remove(this,'mousedown',self.props.touch.mousedownFn[i]);
     eventjs.remove(this,'drag',self.props.touch.dragFn[i]);
+    eventjs.remove(this,'mouseup',self.props.touch.upFn);
    });
   }
  });
